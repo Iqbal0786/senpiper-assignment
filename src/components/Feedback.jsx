@@ -114,9 +114,6 @@ export default function Feedback() {
              
             </Form.Group>
             </Stack>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
           </Form>
         </Card>
       </Container>
