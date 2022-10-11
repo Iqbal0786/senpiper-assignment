@@ -115,6 +115,9 @@ export default function Feedback() {
             </Form.Group>
             </Stack>
           </Form>
+          <Button style={{width:"200px" , marginLeft:"auto" , marginTop:"7%" , backgroundColor:"green", border:"none"}}>
+            Submit Review
+          </Button>
         </Card>
       </Container>
     </>
