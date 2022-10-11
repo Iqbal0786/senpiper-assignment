@@ -45,3 +45,15 @@
   margin-left: -10%;
   cursor: pointer;
 }
+
+
+.warning-text{
+  border: 1px solid red;
+  margin-top: 5px;
+  padding: 5px;
+  color: red;
+  background-color: #ffeced;
+}
+.warning-text > i{
+ margin-right: 5px;
+}
