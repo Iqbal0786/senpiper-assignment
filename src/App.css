@@ -57,3 +57,26 @@
 .warning-text > i{
  margin-right: 5px;
 }
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: separate;
+  height: 400px;
+  overflow: auto;
+  width: 100%;
+}
+
+ tr, td, th {
+  border: 1px solid black;
+}
+th{
+  background-color: #282c34;
+  color: white;
+  padding: 5px;
+  
+}
+
+/* tr:nth-child(even) {
+  background-color: #dddddd;
+} */
