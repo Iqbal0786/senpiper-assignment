@@ -8,10 +8,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Button, Checkbox, Typography } from "@mui/material";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function RecordTable({ data, getRecordIds }) {
   const [filterData, setFilterData] = React.useState(data);
   const [selectedRecord, setSelectedRecord] = React.useState([]);
+  const navigate= useNavigate()
   // console.log("checked data id" ,selectedRecord)
 
   const checkBoxHandler = (e, recordId) => {
@@ -27,6 +29,23 @@ export default function RecordTable({ data, getRecordIds }) {
   React.useEffect(() => {
     getRecordIds(selectedRecord);
   }, [selectedRecord]);
+  React.useEffect(()=>{
+    if(data.length==0){
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "No Records Found !!",
+            confirmButtonText: 'Go Back',
+            timer:5000
+          }).then((result)=>{
+            if(result.isConfirmed){navigate("/")}
+            else {
+                navigate("/")
+
+            }
+        })
+    }
+  },[])
   return (
     <Paper
       sx={{
@@ -65,13 +84,6 @@ export default function RecordTable({ data, getRecordIds }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.length == 0 &&
-              Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a to="/"> Click to go back to feedback page </a>',
-              })}
             {data &&
               data.map((row) => {
                 return (
