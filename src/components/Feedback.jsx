@@ -36,7 +36,7 @@ export default function Feedback() {
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Phone<span style={{color:"red"}}>*</span></Form.Label>
                <Stack direction="horizontal" gap={2}>
-               <Form.Select style={{width:"60px"}}>
+               <Form.Select style={{width:"100px" ,fontSize:"16px"}}>
                  {
                  phoneData.map((opt)=>{
                    return (
@@ -47,7 +47,7 @@ export default function Feedback() {
                  })
                  }
               </Form.Select>
-              <Form.Control type="text" placeholder="Eg. 9999998988" style={{width:"430px"}} />
+              <Form.Control type="text" placeholder="Eg. 9999998988" style={{width:"390px"}} />
 
                </Stack>
             </Form.Group>
