@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.form-check-input:checked{
+  background-color: rgb(119, 19, 176) !important;
+     border: none;
+}
