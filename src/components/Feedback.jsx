@@ -1,82 +1,121 @@
 import React, { useState } from "react";
 import { Container, Card, Stack, Form, Button } from "react-bootstrap";
 import { phoneData } from "../utils/phoneData";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 export default function Feedback() {
   // user state
-  const [userinput,setUserInput]=useState({
-    id:uuidv4(),
-    name:"",
-    email:"",
-    country:"",
-    phone:"",
-    serviceRating:[],
-    beverageRating:[],
-    cleaningRating:[],
-    overallRating:[]
+  const [userinput, setUserInput] = useState({
+    id: uuidv4(),
+    name: "",
+    email: "",
+    country: "",
+    phone: "",
+    serviceRating: [],
+    beverageRating: [],
+    cleaningRating: [],
+    overallRating: [],
   });
-
+  const [isValidate, setIsValidate] = useState(false);
   // form input handler
- const formHandler=(e)=>{
-   const {value,name}=e.target;
-    setUserInput({...userinput,[name]:value})
+  const formHandler = (e) => {
+    const { value, name } = e.target;
+    setUserInput({ ...userinput, [name]: value });
+  };
 
- }  
-
- // checkboxes handlers 
- const checkboxHanlder1=(e)=>{
-     const {checked,value , label}=e.target
-    if(checked){
-       let serviceRating=userinput.serviceRating;
-       serviceRating.push(value);
-       setUserInput({...userinput,serviceRating:[...serviceRating]})
+  // checkboxes handlers
+  const checkboxHanlder1 = (e) => {
+    const { checked, value, label } = e.target;
+    if (checked) {
+      let serviceRating = userinput.serviceRating;
+      serviceRating.push(value);
+      setUserInput({ ...userinput, serviceRating: [...serviceRating] });
+    } else {
+      let updatedRating = userinput.serviceRating.filter(
+        (rating) => rating != value
+      );
+      setUserInput({ ...userinput, serviceRating: [...updatedRating] });
     }
-    else{
-       let updatedRating= userinput.serviceRating.filter((rating)=>rating!=value);
-       setUserInput({...userinput,serviceRating:[...updatedRating]})
+  };
+  const checkboxHanlder2 = (e) => {
+    const { checked, value, label } = e.target;
+    if (checked) {
+      let beverageRating = userinput.beverageRating;
+      beverageRating.push(value);
+      setUserInput({ ...userinput, beverageRating: [...beverageRating] });
+    } else {
+      let updatedRating = userinput.beverageRating.filter(
+        (rating) => rating != value
+      );
+      setUserInput({ ...userinput, beverageRating: [...updatedRating] });
     }
+  };
+  const checkboxHanlder3 = (e) => {
+    const { checked, value, label } = e.target;
+    if (checked) {
+      let cleaningRating = userinput.cleaningRating;
+      cleaningRating.push(value);
+      setUserInput({ ...userinput, cleaningRating: [...cleaningRating] });
+    } else {
+      let updatedRating = userinput.cleaningRating.filter(
+        (rating) => rating != value
+      );
+      setUserInput({ ...userinput, cleaningRating: [...updatedRating] });
+    }
+  };
+  const checkboxHanlder4 = (e) => {
+    const { checked, value, label } = e.target;
+    if (checked) {
+      let overAllRating = userinput.overallRating;
+      overAllRating.push(value);
+      setUserInput({ ...userinput, overallRating: [...overAllRating] });
+    } else {
+      let updatedRating = userinput.overallRating.filter(
+        (rating) => rating != value
+      );
+      setUserInput({ ...userinput, overallRating: [...updatedRating] });
+    }
+  };
 
- }
- const checkboxHanlder2=(e)=>{
-  const {checked,value , label}=e.target
-  if(checked){
-     let beverageRating=userinput.beverageRating;
-     beverageRating.push(value);
-     setUserInput({...userinput,beverageRating:[...beverageRating]})
-  }
-  else{
-     let updatedRating= userinput.beverageRating.filter((rating)=>rating!=value);
-     setUserInput({...userinput,beverageRating:[...updatedRating]})
-  }
+  const submitFromData = (e) => {
+    e.preventDefault();
+    let {
+      name,
+      email,
+      phone,
+      country,
+      serviceRating,
+      beverageRating,
+      cleaningRating,
+      overallRating,
+    } = userinput;
 
-}
-const checkboxHanlder3=(e)=>{
-  const {checked,value , label}=e.target
-  if(checked){
-     let cleaningRating=userinput.cleaningRating;
-     cleaningRating.push(value);
-     setUserInput({...userinput,cleaningRating:[...cleaningRating]})
-  }
-  else{
-     let updatedRating= userinput.cleaningRating.filter((rating)=>rating!=value);
-     setUserInput({...userinput,cleaningRating:[...updatedRating]})
-  }
-}
-const checkboxHanlder4=(e)=>{
-  const {checked,value , label}=e.target
-  if(checked){
-     let overAllRating=userinput.overallRating;
-     overAllRating.push(value);
-     setUserInput({...userinput,overallRating:[...overAllRating]})
-  }
-  else{
-     let updatedRating= userinput.overallRating.filter((rating)=>rating!=value);
-     setUserInput({...userinput,overallRating:[...updatedRating]})
-  }
+    if (!name) {
+      setIsValidate(true);
+    } else if (!email) {
+      setIsValidate(true);
+    } else if (!phone) {
+      setIsValidate(true);
+    } else if (!country) {
+      setIsValidate(true);
+    } else if (!serviceRating.length) {
+      setIsValidate(true);
+    } else if (!beverageRating.length) {
+      setIsValidate(true);
+    } else if (!cleaningRating.length) {
+      setIsValidate(true);
+    } else if (!overallRating.length) {
+      setIsValidate(true);
+    }
+    else {
+      // setting up local storage 
+       let feedbacklist=JSON.parse(localStorage.getItem("feedbackDb"))||[];
+        feedbacklist.push(userinput)
+      localStorage.setItem("feedbackDb" , JSON.stringify(feedbacklist))
+      alert("Successfully submitted the review !!")
+     }
+  };
 
-}
-
-console.log(userinput)
+  console.log(userinput);
 
   return (
     <>
@@ -109,6 +148,7 @@ console.log(userinput)
                   onChange={formHandler}
                   name="name"
                 />
+                {isValidate && <p className="warning-text" > <i class="bi bi-exclamation-circle"></i>Please enter the value of the above field</p>}
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label style={{ fontWeight: "bold" }}>
@@ -121,6 +161,7 @@ console.log(userinput)
                   onChange={formHandler}
                   name="email"
                 />
+          
               </Form.Group>
             </Stack>
 
@@ -129,7 +170,11 @@ console.log(userinput)
                 Phone<span style={{ color: "red" }}>*</span>
               </Form.Label>
               <Stack direction="horizontal" gap={2}>
-                <Form.Select style={{ width: "100px", fontSize: "16px" }} name='country' onChange={formHandler}>
+                <Form.Select
+                  style={{ width: "100px", fontSize: "16px" }}
+                  name="country"
+                  onChange={formHandler}
+                >
                   {phoneData.map((opt) => {
                     return <option>{opt.name}</option>;
                   })}
@@ -138,7 +183,7 @@ console.log(userinput)
                   type="text"
                   placeholder="Eg. 9999998988"
                   style={{ width: "390px" }}
-                  name='phone'
+                  name="phone"
                   onChange={formHandler}
                 />
               </Stack>
@@ -150,10 +195,30 @@ console.log(userinput)
                   host.<span style={{ color: "red" }}>*</span>
                 </Form.Label>
                 <Stack direction="horizontal" gap={5}>
-                  <Form.Check type="checkbox" value='Excellent' label="Excellent" onChange={checkboxHanlder1} />
-                  <Form.Check type="checkbox" value='Good' label="Good" onChange={checkboxHanlder1} />
-                  <Form.Check type="checkbox" value='Fair' label="Fair" onChange={checkboxHanlder1} />
-                  <Form.Check type="checkbox" value='Bad' label="Bad"onChange={checkboxHanlder1} />
+                  <Form.Check
+                    type="checkbox"
+                    value="Excellent"
+                    label="Excellent"
+                    onChange={checkboxHanlder1}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    value="Good"
+                    label="Good"
+                    onChange={checkboxHanlder1}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    value="Fair"
+                    label="Fair"
+                    onChange={checkboxHanlder1}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    value="Bad"
+                    label="Bad"
+                    onChange={checkboxHanlder1}
+                  />
                 </Stack>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -162,10 +227,30 @@ console.log(userinput)
                   <span style={{ color: "red" }}>*</span>
                 </Form.Label>
                 <Stack direction="horizontal" gap={5}>
-                  <Form.Check type="checkbox" value='Excellent' label="Excellent"onChange={checkboxHanlder2} />
-                  <Form.Check type="checkbox" value='Good' label="Good"onChange={checkboxHanlder2} />
-                  <Form.Check type="checkbox"  value='Fair'label="Fair" onChange={checkboxHanlder2}/>
-                  <Form.Check type="checkbox" value='Bad' label="Bad"onChange={checkboxHanlder2} />
+                  <Form.Check
+                    type="checkbox"
+                    value="Excellent"
+                    label="Excellent"
+                    onChange={checkboxHanlder2}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    value="Good"
+                    label="Good"
+                    onChange={checkboxHanlder2}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    value="Fair"
+                    label="Fair"
+                    onChange={checkboxHanlder2}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    value="Bad"
+                    label="Bad"
+                    onChange={checkboxHanlder2}
+                  />
                 </Stack>
               </Form.Group>
             </Stack>
@@ -176,10 +261,30 @@ console.log(userinput)
                   <span style={{ color: "red" }}>*</span>
                 </Form.Label>
                 <Stack direction="horizontal" gap={5}>
-                  <Form.Check type="checkbox" value='Excellent' label="Excellent"onChange={checkboxHanlder3} />
-                  <Form.Check type="checkbox" value='Good' label="Good"onChange={checkboxHanlder3} />
-                  <Form.Check type="checkbox" value='Fair' label="Fair" onChange={checkboxHanlder3}/>
-                  <Form.Check type="checkbox" value='Bad' label="Bad" onChange={checkboxHanlder3}/>
+                  <Form.Check
+                    type="checkbox"
+                    value="Excellent"
+                    label="Excellent"
+                    onChange={checkboxHanlder3}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    value="Good"
+                    label="Good"
+                    onChange={checkboxHanlder3}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    value="Fair"
+                    label="Fair"
+                    onChange={checkboxHanlder3}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    value="Bad"
+                    label="Bad"
+                    onChange={checkboxHanlder3}
+                  />
                 </Stack>
               </Form.Group>
               <Form.Group className="mb-3" style={{ marginLeft: "100px" }}>
@@ -188,10 +293,30 @@ console.log(userinput)
                   <span style={{ color: "red" }}>*</span>
                 </Form.Label>
                 <Stack direction="horizontal" gap={5}>
-                  <Form.Check type="checkbox" value='Excellent' label="Excellent"onChange={checkboxHanlder4} />
-                  <Form.Check type="checkbox" value='Good' label="Good" onChange={checkboxHanlder4}/>
-                  <Form.Check type="checkbox"  value='Fair'label="Fair"onChange={checkboxHanlder4} />
-                  <Form.Check type="checkbox" value='Bad' label="Bad" onChange={checkboxHanlder4}/>
+                  <Form.Check
+                    type="checkbox"
+                    value="Excellent"
+                    label="Excellent"
+                    onChange={checkboxHanlder4}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    value="Good"
+                    label="Good"
+                    onChange={checkboxHanlder4}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    value="Fair"
+                    label="Fair"
+                    onChange={checkboxHanlder4}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    value="Bad"
+                    label="Bad"
+                    onChange={checkboxHanlder4}
+                  />
                 </Stack>
               </Form.Group>
             </Stack>
@@ -204,6 +329,8 @@ console.log(userinput)
               backgroundColor: "green",
               border: "none",
             }}
+            onClick={submitFromData}
+            type="submit"
           >
             Submit Review
           </Button>
