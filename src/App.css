@@ -41,3 +41,7 @@
   background-color: rgb(119, 19, 176) !important;
      border: none;
 }
+.bi-search{
+  margin-left: -10%;
+  cursor: pointer;
+}
