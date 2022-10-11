@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Card, Stack, Form, Button } from "react-bootstrap";
 import { phoneData } from "../utils/phoneData";
 import { v4 as uuidv4 } from "uuid";
+import Swal from "sweetalert2";
 export default function Feedback() {
   // user state
   const [userinput, setUserInput] = useState({
@@ -111,7 +112,28 @@ export default function Feedback() {
        let feedbacklist=JSON.parse(localStorage.getItem("feedbackDb"))||[];
         feedbacklist.push(userinput)
       localStorage.setItem("feedbackDb" , JSON.stringify(feedbacklist))
-      alert("Successfully submitted the review !!")
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Thank you for providing your feedback',
+        text:"We will work towards improving your experience",
+        confirmButtonText: 'Close'
+        
+      }).then((result)=>{
+           if(result.isConfirmed){
+            setUserInput({
+              id: uuidv4(),
+        name: "",
+        email: "",
+        country: "",
+        phone: "",
+        serviceRating: [],
+        beverageRating: [],
+        cleaningRating: [],
+        overallRating: [],
+            })
+           }
+      })
      }
   };
 
