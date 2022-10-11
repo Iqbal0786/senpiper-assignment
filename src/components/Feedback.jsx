@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Card, Stack, Form, Button } from "react-bootstrap";
 import { phoneData } from "../utils/phoneData";
 export default function Feedback() {
+  const [userinput,setUserInput]=useState({
+    id:"",
+    name:"",
+    email:"",
+    phone:""
+  })
   return (
     <>
       <Container
@@ -62,60 +68,67 @@ export default function Feedback() {
               </Stack>
             </Form.Group>
             <Stack direction="horizontal" gap={5}>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Label style={{ fontWeight: "bold" }}>
-                Please rate the quality of the service you recieved from the
-                host.<span style={{ color: "red" }}>*</span>
-              </Form.Label>
-              <Stack direction="horizontal" gap={5}>
-              <Form.Check type="checkbox" label="Excellent" />
-              <Form.Check type="checkbox" label="Good" />
-              <Form.Check type="checkbox" label="Fair" />
-              <Form.Check type="checkbox" label="Bad" />
-              </Stack>
-             
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Label style={{ fontWeight: "bold" }}>
-              Please rate the quality of your beverage.<span style={{ color: "red" }}>*</span>
-              </Form.Label>
-              <Stack direction="horizontal" gap={5}>
-              <Form.Check type="checkbox" label="Excellent" />
-              <Form.Check type="checkbox" label="Good" />
-              <Form.Check type="checkbox" label="Fair" />
-              <Form.Check type="checkbox" label="Bad" />
-              </Stack>
-             
-            </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Label style={{ fontWeight: "bold" }}>
+                  Please rate the quality of the service you recieved from the
+                  host.<span style={{ color: "red" }}>*</span>
+                </Form.Label>
+                <Stack direction="horizontal" gap={5}>
+                  <Form.Check type="checkbox" label="Excellent" />
+                  <Form.Check type="checkbox" label="Good" />
+                  <Form.Check type="checkbox" label="Fair" />
+                  <Form.Check type="checkbox" label="Bad" />
+                </Stack>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Label style={{ fontWeight: "bold" }}>
+                  Please rate the quality of your beverage.
+                  <span style={{ color: "red" }}>*</span>
+                </Form.Label>
+                <Stack direction="horizontal" gap={5}>
+                  <Form.Check type="checkbox" label="Excellent" />
+                  <Form.Check type="checkbox" label="Good" />
+                  <Form.Check type="checkbox" label="Fair" />
+                  <Form.Check type="checkbox" label="Bad" />
+                </Stack>
+              </Form.Group>
             </Stack>
             <Stack direction="horizontal" gap={5}>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Label style={{ fontWeight: "bold" }}>
-              Was our restaurant clean?<span style={{ color: "red" }}>*</span>
-              </Form.Label>
-              <Stack direction="horizontal" gap={5}>
-              <Form.Check type="checkbox" label="Excellent" />
-              <Form.Check type="checkbox" label="Good" />
-              <Form.Check type="checkbox" label="Fair" />
-              <Form.Check type="checkbox" label="Bad" />
-              </Stack>
-             
-            </Form.Group>
-            <Form.Group className="mb-3" style={{marginLeft:"100px"}}>
-              <Form.Label style={{ fontWeight: "bold" }}>
-              Please rate your overall dining experience.<span style={{ color: "red" }}>*</span>
-              </Form.Label>
-              <Stack direction="horizontal" gap={5}>
-              <Form.Check type="checkbox" label="Excellent" />
-              <Form.Check type="checkbox" label="Good" />
-              <Form.Check type="checkbox" label="Fair" />
-              <Form.Check type="checkbox" label="Bad" />
-              </Stack>
-             
-            </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Label style={{ fontWeight: "bold" }}>
+                  Was our restaurant clean?
+                  <span style={{ color: "red" }}>*</span>
+                </Form.Label>
+                <Stack direction="horizontal" gap={5}>
+                  <Form.Check type="checkbox" label="Excellent" />
+                  <Form.Check type="checkbox" label="Good" />
+                  <Form.Check type="checkbox" label="Fair" />
+                  <Form.Check type="checkbox" label="Bad" />
+                </Stack>
+              </Form.Group>
+              <Form.Group className="mb-3" style={{ marginLeft: "100px" }}>
+                <Form.Label style={{ fontWeight: "bold" }}>
+                  Please rate your overall dining experience.
+                  <span style={{ color: "red" }}>*</span>
+                </Form.Label>
+                <Stack direction="horizontal" gap={5}>
+                  <Form.Check type="checkbox" label="Excellent" />
+                  <Form.Check type="checkbox" label="Good" />
+                  <Form.Check type="checkbox" label="Fair" />
+                  <Form.Check type="checkbox" label="Bad" />
+                </Stack>
+              </Form.Group>
             </Stack>
           </Form>
-          <Button style={{width:"200px" , marginLeft:"auto" , marginTop:"7%" , backgroundColor:"green", border:"none"}}>
+          <Button
+            style={{
+              width: "200px",
+              marginLeft: "auto",
+              marginTop: "7%",
+              backgroundColor: "green",
+              border: "none",
+            }}
+          >
             Submit Review
           </Button>
         </Card>
