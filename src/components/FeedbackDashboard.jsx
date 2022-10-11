@@ -1,8 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Container, Table, Form, Stack, Button } from "react-bootstrap";
+import { json } from "react-router-dom";
 import RecordTable from "./RecordTable";
 export default function FeedbackDashboard() {
  const [feedbackData,setFeedbackData]=useState([]);
+ const [toDeleteRecords,setToDeleteRecords]=useState([]);
+
+ const getRecordIds=(records)=>{
+      setToDeleteRecords([...records])
+ }
+
+ const deleteHandler=()=>{
+    const updatedlist= feedbackData.filter((elem)=>!toDeleteRecords.includes(elem.id));
+    localStorage.setItem("feedbackDb",JSON.stringify(updatedlist));
+    let feedbacklist=JSON.parse(localStorage.getItem("feedbackDb"));
+    setFeedbackData([...feedbacklist])
+    console.log(updatedlist);
+
+ }
 
  useEffect(()=>{
     let feedbacklist=JSON.parse(localStorage.getItem("feedbackDb"));
@@ -16,7 +31,7 @@ export default function FeedbackDashboard() {
         fluid
         style={{
           backgroundColor: "#f8fafb",
-          height: "800px",
+          height: "750px",
           padding: "40px",
           
         }}
@@ -55,7 +70,10 @@ export default function FeedbackDashboard() {
             </Button>
           </Stack>
         </Stack>
-        <RecordTable data={feedbackData}/>
+        <RecordTable data={feedbackData}  getRecordIds={getRecordIds}/>
+        <Stack style={{marginTop:"-20px"}}>
+        <Button style={{backgroundColor:"#e84c89" , border:"none" , marginLeft:"auto"}} onClick={deleteHandler}>Delete</Button>
+        </Stack>
       </Container>
     </>
   );
