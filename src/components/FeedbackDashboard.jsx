@@ -89,7 +89,7 @@ const  fetchRecord=()=>{
             )}
           </div>
           <Stack direction="horizontal" gap={3} style={{ marginLeft: "auto" }}>
-            <Form.Control type="text" style={{ width: "200px" }}  onChange={getSearchInput}/>
+            <Form.Control type="text" value={searchText} style={{ width: "200px" }}  onChange={getSearchInput}/>
             <i class="bi bi-search"  onClick={searchHandler}></i>
             <Button
               style={{
@@ -101,6 +101,7 @@ const  fetchRecord=()=>{
               }}
               onClick={()=>{
                   setFilterData([])
+                  setSearchText("")
                }}
             >
               <i class="bi bi-arrow-clockwise" ></i>
