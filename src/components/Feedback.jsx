@@ -17,7 +17,8 @@ export default function Feedback() {
     cleaningRating: [],
     overallRating: [],
   });
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
+  // validation state for form 
   const [isValidate, setIsValidate] = useState({
     name: false,
     name: false,
@@ -33,16 +34,41 @@ export default function Feedback() {
   const formHandler = (e) => {
     const { value, name } = e.target;
     setUserInput({ ...userinput, [name]: value });
+    setIsValidate({
+      name: false,
+      name: false,
+      email: false,
+      country: false,
+      phone: false,
+      serviceRating: false,
+      beverageRating: false,
+      cleaningRating: false,
+      overallRating: false,
+    });
   };
 
   // checkboxes handlers
   const checkboxHanlder1 = (e) => {
     const { checked, value, label } = e.target;
-    if (checked) {
+     if (checked) {
+      // pushing new checked value
       let serviceRating = userinput.serviceRating;
       serviceRating.push(value);
-      setUserInput({ ...userinput, serviceRating: [...serviceRating] });
+      setUserInput({ ...userinput, serviceRating: [...serviceRating] }); 
+      // resetting the validation object
+      setIsValidate({
+        name: false,
+        name: false,
+        email: false,
+        country: false,
+        phone: false,
+        serviceRating: false,
+        beverageRating: false,
+        cleaningRating: false,
+        overallRating: false,
+      });
     } else {
+      // removing unchecked values form the array 
       let updatedRating = userinput.serviceRating.filter(
         (rating) => rating != value
       );
@@ -55,6 +81,17 @@ export default function Feedback() {
       let beverageRating = userinput.beverageRating;
       beverageRating.push(value);
       setUserInput({ ...userinput, beverageRating: [...beverageRating] });
+      setIsValidate({
+        name: false,
+        name: false,
+        email: false,
+        country: false,
+        phone: false,
+        serviceRating: false,
+        beverageRating: false,
+        cleaningRating: false,
+        overallRating: false,
+      });
     } else {
       let updatedRating = userinput.beverageRating.filter(
         (rating) => rating != value
@@ -68,6 +105,17 @@ export default function Feedback() {
       let cleaningRating = userinput.cleaningRating;
       cleaningRating.push(value);
       setUserInput({ ...userinput, cleaningRating: [...cleaningRating] });
+      setIsValidate({
+        name: false,
+        name: false,
+        email: false,
+        country: false,
+        phone: false,
+        serviceRating: false,
+        beverageRating: false,
+        cleaningRating: false,
+        overallRating: false,
+      });
     } else {
       let updatedRating = userinput.cleaningRating.filter(
         (rating) => rating != value
@@ -81,6 +129,17 @@ export default function Feedback() {
       let overAllRating = userinput.overallRating;
       overAllRating.push(value);
       setUserInput({ ...userinput, overallRating: [...overAllRating] });
+      setIsValidate({
+        name: false,
+        name: false,
+        email: false,
+        country: false,
+        phone: false,
+        serviceRating: false,
+        beverageRating: false,
+        cleaningRating: false,
+        overallRating: false,
+      });
     } else {
       let updatedRating = userinput.overallRating.filter(
         (rating) => rating != value
@@ -131,7 +190,7 @@ export default function Feedback() {
         confirmButtonText: "Close",
       }).then((result) => {
         if (result.isConfirmed) {
-           navigate(0)
+          navigate(0);
         } else {
         }
       });
@@ -169,13 +228,20 @@ export default function Feedback() {
           style={{
             backgroundColor: "white",
             maxHeight: "800px",
-            width:"100%",
+            width: "100%",
             marginTop: "15px",
             padding: "30px",
           }}
         >
           <Form>
-            <div style={{width:"100%" , display:"flex",justifyContent:"space-between" , flexWrap:"wrap"}}>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+              }}
+            >
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label style={{ fontWeight: "bold" }}>
                   Customer Name<span style={{ color: "red" }}>*</span>
@@ -208,6 +274,13 @@ export default function Feedback() {
                   name="email"
                   value={userinput.email}
                 />
+                {isValidate.email && (
+                  <p className="warning-text">
+                    {" "}
+                    <i className="bi bi-exclamation-circle"></i>Please enter the
+                    value of the above field
+                  </p>
+                )}
               </Form.Group>
             </div>
 
@@ -215,17 +288,24 @@ export default function Feedback() {
               <Form.Label style={{ fontWeight: "bold" }}>
                 Phone<span style={{ color: "red" }}>*</span>
               </Form.Label>
-              <div style={{width:"40%" , display:"flex",justifyContent:"space-between" ,gap:"20px"}}>
+              <div
+                style={{
+                  width: "40%",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: "20px",
+                }}
+              >
                 <Form.Select
                   style={{ width: "100px", fontSize: "16px" }}
                   name="country"
                   onChange={formHandler}
-              
                 >
                   {phoneData.map((opt) => {
                     return <option key={opt.name}>{opt.name}</option>;
                   })}
                 </Form.Select>
+
                 <Form.Control
                   type="text"
                   placeholder="Eg. 9999998988"
@@ -235,8 +315,29 @@ export default function Feedback() {
                   value={userinput.phone}
                 />
               </div>
+              {isValidate.phone && (
+                <p className="warning-text" style={{ width: "40%" }}>
+                  {" "}
+                  <i className="bi bi-exclamation-circle"></i>Please enter the
+                  value of the above field
+                </p>
+              )}
+              {isValidate.country && (
+                <p className="warning-text" style={{ width: "40%" }}>
+                  {" "}
+                  <i className="bi bi-exclamation-circle"></i>Please enter the
+                  value of the above field
+                </p>
+              )}
             </Form.Group>
-            <div style={{width:"92%" , display:"flex",justifyContent:"space-between" , flexWrap:"wrap"}}>
+            <div
+              style={{
+                width: "92%",
+                display: "flex",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+              }}
+            >
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Label style={{ fontWeight: "bold" }}>
                   Please rate the quality of the service you recieved from the
@@ -268,6 +369,13 @@ export default function Feedback() {
                     onChange={checkboxHanlder1}
                   />
                 </Stack>
+                {isValidate.serviceRating && (
+                  <p className="warning-text">
+                    {" "}
+                    <i className="bi bi-exclamation-circle"></i>Please select
+                    atleast one option given above{" "}
+                  </p>
+                )}
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Label style={{ fontWeight: "bold" }}>
@@ -300,9 +408,23 @@ export default function Feedback() {
                     onChange={checkboxHanlder2}
                   />
                 </Stack>
+                {isValidate.beverageRating && (
+                  <p className="warning-text">
+                    {" "}
+                    <i className="bi bi-exclamation-circle"></i>Please select
+                    atleast one option given above{" "}
+                  </p>
+                )}
               </Form.Group>
             </div>
-            <div style={{width:"92%" , display:"flex",justifyContent:"space-between" , flexWrap:"wrap"}}>
+            <div
+              style={{
+                width: "92%",
+                display: "flex",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+              }}
+            >
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Label style={{ fontWeight: "bold" }}>
                   Was our restaurant clean?
@@ -334,8 +456,15 @@ export default function Feedback() {
                     onChange={checkboxHanlder3}
                   />
                 </Stack>
+                {isValidate.cleaningRating && (
+                  <p className="warning-text">
+                    {" "}
+                    <i className="bi bi-exclamation-circle"></i>Please select
+                    atleast one option given above{" "}
+                  </p>
+                )}
               </Form.Group>
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-3">
                 <Form.Label style={{ fontWeight: "bold" }}>
                   Please rate your overall dining experience.
                   <span style={{ color: "red" }}>*</span>
@@ -366,6 +495,13 @@ export default function Feedback() {
                     onChange={checkboxHanlder4}
                   />
                 </Stack>
+                {isValidate.overallRating && (
+                  <p className="warning-text">
+                    {" "}
+                    <i className="bi bi-exclamation-circle"></i>Please select
+                    atleast one option given above{" "}
+                  </p>
+                )}
               </Form.Group>
             </div>
           </Form>
