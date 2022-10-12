@@ -3,6 +3,7 @@ import { Container, Card, Stack, Form, Button } from "react-bootstrap";
 import { phoneData } from "../utils/phoneData";
 import { v4 as uuidv4 } from "uuid";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 export default function Feedback() {
   // user state
   const [userinput, setUserInput] = useState({
@@ -16,6 +17,7 @@ export default function Feedback() {
     cleaningRating: [],
     overallRating: [],
   });
+  const navigate=useNavigate()
   const [isValidate, setIsValidate] = useState(false);
   // form input handler
   const formHandler = (e) => {
@@ -135,7 +137,10 @@ export default function Feedback() {
         fluid
       >
         <Card style={{ height: "40px", padding: "5px 0px 5px 15px" }}>
-          <Card.Title>Aromatic bar</Card.Title>
+         <Stack direction="horizontal" gap={5}>
+         <Card.Title>Aromatic bar</Card.Title>
+          <Card.Title style={{marginLeft:"auto" , marginRight:"40px" , color:"blue" , cursor:"pointer" }} onClick={()=>{navigate("/dashboard")}}>Dashboard</Card.Title>
+         </Stack>
         </Card>
         <Card
           style={{
@@ -336,7 +341,14 @@ export default function Feedback() {
               </Form.Group>
             </Stack>
           </Form>
-          <div style={{ fontFamily: "sans-serif", marginTop: "10px" ,fontStyle:"italic"  , color:"#172329"}}>
+          <div
+            style={{
+              fontFamily: "sans-serif",
+              marginTop: "10px",
+              fontStyle: "italic",
+              color: "#172329",
+            }}
+          >
             We are committed to providing you with the best dining experience
             possible, so we welcome your comments. Please fill out this
             questionnaire. Thank you
