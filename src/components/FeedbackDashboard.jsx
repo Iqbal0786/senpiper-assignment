@@ -55,7 +55,7 @@ export default function FeedbackDashboard() {
     // console.log(updatedlist);
   };
   const fetchRecord = () => {
-    let feedbacklist = JSON.parse(localStorage.getItem("feedbackDb"));
+    let feedbacklist = JSON.parse(localStorage.getItem("feedbackDb"))||[];
     setFeedbackData([...feedbacklist]);
   };
   useEffect(() => {
