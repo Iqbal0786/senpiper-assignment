@@ -8,7 +8,7 @@ export default function FeedbackDashboard() {
   const [toDeleteRecords, setToDeleteRecords] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filterData, setFilterData] = useState([]);
-  const [refresh, setRefresh] = useState(false);
+ //  variable that contains final data to pass as a prop
   const data = filterData.length ? filterData : feedbackData;
   const naviagte = useNavigate();
 
@@ -115,6 +115,7 @@ export default function FeedbackDashboard() {
                 backgroundColor: "green",
                 border: "none",
               }}
+              onClick={()=>naviagte("/")}
             >
               Add New
             </Button>
