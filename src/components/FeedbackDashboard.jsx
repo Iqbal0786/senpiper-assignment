@@ -77,9 +77,9 @@ export default function FeedbackDashboard() {
             <h4 className="mb-3" style={{ fontSize: "20px" }}>
               Aromatic bar
             </h4>
-            {feedbackData.length ? (
+            {data.length ? (
               <p style={{ fontSize: "15px", fontFamily: "sans-serif" }}>
-                {feedbackData.length} Records found.
+                {data.length} Records found.
               </p>
             ) : (
               ""
@@ -91,6 +91,7 @@ export default function FeedbackDashboard() {
               value={searchText}
               style={{ width: "200px" }}
               onChange={getSearchInput}
+              placeholder='search by name , email or phone'
             />
             <i class="bi bi-search" onClick={searchHandler}></i>
             <Button
