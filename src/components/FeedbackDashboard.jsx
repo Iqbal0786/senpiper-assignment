@@ -91,7 +91,7 @@ export default function FeedbackDashboard() {
               value={searchText}
               style={{ width: "200px" }}
               onChange={getSearchInput}
-              placeholder='search by name , email or phone'
+              placeholder='i.e name , email ,phone'
             />
             <i class="bi bi-search" onClick={searchHandler}></i>
             <Button
