@@ -138,7 +138,7 @@ export default function Feedback() {
     }
   };
 
-  console.log(userinput);
+  // console.log(userinput);
 
   return (
     <>
@@ -190,7 +190,7 @@ export default function Feedback() {
                 {isValidate.name && (
                   <p className="warning-text">
                     {" "}
-                    <i class="bi bi-exclamation-circle"></i>Please enter the
+                    <i className="bi bi-exclamation-circle"></i>Please enter the
                     value of the above field
                   </p>
                 )}
@@ -222,7 +222,7 @@ export default function Feedback() {
               
                 >
                   {phoneData.map((opt) => {
-                    return <option>{opt.name}</option>;
+                    return <option key={opt.name}>{opt.name}</option>;
                   })}
                 </Form.Select>
                 <Form.Control
