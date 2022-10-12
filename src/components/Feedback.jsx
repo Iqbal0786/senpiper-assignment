@@ -168,13 +168,14 @@ export default function Feedback() {
         <Card
           style={{
             backgroundColor: "white",
-            height: "500px",
+            maxHeight: "800px",
+            width:"100%",
             marginTop: "15px",
             padding: "30px",
           }}
         >
           <Form>
-            <Stack direction="horizontal" gap={5}>
+            <div style={{width:"100%" , display:"flex",justifyContent:"space-between" , flexWrap:"wrap"}}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label style={{ fontWeight: "bold" }}>
                   Customer Name<span style={{ color: "red" }}>*</span>
@@ -208,13 +209,13 @@ export default function Feedback() {
                   value={userinput.email}
                 />
               </Form.Group>
-            </Stack>
+            </div>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label style={{ fontWeight: "bold" }}>
                 Phone<span style={{ color: "red" }}>*</span>
               </Form.Label>
-              <Stack direction="horizontal" gap={2}>
+              <div style={{width:"40%" , display:"flex",justifyContent:"space-between" ,gap:"20px"}}>
                 <Form.Select
                   style={{ width: "100px", fontSize: "16px" }}
                   name="country"
@@ -233,9 +234,9 @@ export default function Feedback() {
                   onChange={formHandler}
                   value={userinput.phone}
                 />
-              </Stack>
+              </div>
             </Form.Group>
-            <Stack direction="horizontal" gap={5}>
+            <div style={{width:"92%" , display:"flex",justifyContent:"space-between" , flexWrap:"wrap"}}>
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Label style={{ fontWeight: "bold" }}>
                   Please rate the quality of the service you recieved from the
@@ -300,8 +301,8 @@ export default function Feedback() {
                   />
                 </Stack>
               </Form.Group>
-            </Stack>
-            <Stack direction="horizontal" gap={5}>
+            </div>
+            <div style={{width:"92%" , display:"flex",justifyContent:"space-between" , flexWrap:"wrap"}}>
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Label style={{ fontWeight: "bold" }}>
                   Was our restaurant clean?
@@ -334,7 +335,7 @@ export default function Feedback() {
                   />
                 </Stack>
               </Form.Group>
-              <Form.Group className="mb-3" style={{ marginLeft: "100px" }}>
+              <Form.Group className="mb-3" >
                 <Form.Label style={{ fontWeight: "bold" }}>
                   Please rate your overall dining experience.
                   <span style={{ color: "red" }}>*</span>
@@ -366,7 +367,7 @@ export default function Feedback() {
                   />
                 </Stack>
               </Form.Group>
-            </Stack>
+            </div>
           </Form>
           <div
             style={{
