@@ -117,17 +117,10 @@ export default function Feedback() {
         title: "Thank you for providing your feedback",
         text: "We will work towards improving your experience",
         confirmButtonText: "Close",
-      });
-      setUserInput({
-        id: uuidv4(),
-        name: "",
-        email: "",
-        country: "",
-        phone: "",
-        serviceRating: [],
-        beverageRating: [],
-        cleaningRating: [],
-        overallRating: [],
+      }).then((result) => {
+        if (result.isConfirmed) {
+        } else {
+        }
       });
     }
   };
@@ -343,11 +336,16 @@ export default function Feedback() {
               </Form.Group>
             </Stack>
           </Form>
+          <div style={{ fontFamily: "sans-serif", marginTop: "10px" ,fontStyle:"italic"  , color:"#172329"}}>
+            We are committed to providing you with the best dining experience
+            possible, so we welcome your comments. Please fill out this
+            questionnaire. Thank you
+          </div>
           <Button
             style={{
               width: "200px",
               marginLeft: "auto",
-              marginTop: "7%",
+              marginTop: "4%",
               backgroundColor: "green",
               border: "none",
             }}
