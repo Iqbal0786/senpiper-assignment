@@ -6,34 +6,31 @@ import RecordTable from "./RecordTable";
 export default function FeedbackDashboard() {
   const [feedbackData, setFeedbackData] = useState([]);
   const [toDeleteRecords, setToDeleteRecords] = useState([]);
-  const [searchText,setSearchText]=useState("");
-  const [filterData,setFilterData]=useState([]);
-  const[refresh,setRefresh]=useState(false)
-  const data= filterData.length?filterData:feedbackData;
+  const [searchText, setSearchText] = useState("");
+  const [filterData, setFilterData] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  const data = filterData.length ? filterData : feedbackData;
   const naviagte = useNavigate();
 
   const getRecordIds = (records) => {
     setToDeleteRecords([...records]);
   };
-  const getSearchInput=(e)=>{
-     setSearchText(e.target.value)
-  }
-  const searchHandler=()=>{
-    let updatedlist= feedbackData.filter((record)=>{
-      if(record.name===searchText){
-        return record
+  const getSearchInput = (e) => {
+    setSearchText(e.target.value);
+  };
+  const searchHandler = () => {
+    let updatedlist = feedbackData.filter((record) => {
+      if (record.name === searchText) {
+        return record;
+      } else if (record.email === searchText) {
+        return record;
+      } else if (record.phone === searchText) {
+        return record;
       }
-      else if(record.email===searchText){
-        return record
-      }
-      else if(record.phone===searchText){
-        return record
-      }
-    })
-    
-    setFilterData(updatedlist)
- 
-  }
+    });
+
+    setFilterData(updatedlist);
+  };
   const deleteHandler = () => {
     if (toDeleteRecords.length == 0) {
       Swal.fire({
@@ -57,12 +54,12 @@ export default function FeedbackDashboard() {
     setToDeleteRecords([]);
     console.log(updatedlist);
   };
-const  fetchRecord=()=>{
-  let feedbacklist = JSON.parse(localStorage.getItem("feedbackDb"));
+  const fetchRecord = () => {
+    let feedbacklist = JSON.parse(localStorage.getItem("feedbackDb"));
     setFeedbackData([...feedbacklist]);
-}
+  };
   useEffect(() => {
-     fetchRecord()
+    fetchRecord();
   }, []);
 
   return (
@@ -89,8 +86,13 @@ const  fetchRecord=()=>{
             )}
           </div>
           <Stack direction="horizontal" gap={3} style={{ marginLeft: "auto" }}>
-            <Form.Control type="text" value={searchText} style={{ width: "200px" }}  onChange={getSearchInput}/>
-            <i class="bi bi-search"  onClick={searchHandler}></i>
+            <Form.Control
+              type="text"
+              value={searchText}
+              style={{ width: "200px" }}
+              onChange={getSearchInput}
+            />
+            <i class="bi bi-search" onClick={searchHandler}></i>
             <Button
               style={{
                 backgroundColor: "white",
@@ -99,12 +101,12 @@ const  fetchRecord=()=>{
                 border: "transparent",
                 fontSize: "18px",
               }}
-              onClick={()=>{
-                  setFilterData([])
-                  setSearchText("")
-               }}
+              onClick={() => {
+                setFilterData([]);
+                setSearchText("");
+              }}
             >
-              <i class="bi bi-arrow-clockwise" ></i>
+              <i class="bi bi-arrow-clockwise"></i>
             </Button>
             <Button
               style={{
