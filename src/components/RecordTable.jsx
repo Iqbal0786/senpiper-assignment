@@ -29,35 +29,20 @@ export default function RecordTable({ data, getRecordIds }) {
   React.useEffect(() => {
     getRecordIds(selectedRecord);
   }, [selectedRecord]);
-  React.useEffect(()=>{
-    if(data.length==0){
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "No Records Found !!",
-            confirmButtonText: 'Go Back',
-            timer:5000
-          }).then((result)=>{
-            if(result.isConfirmed){navigate("/")}
-            else {
-                navigate("/")
 
-            }
-        })
-    }
-  },[])
+
   return (
     <Paper
       sx={{
         width: "100%",
-        height: "500px",
+        height: "450px",
         overflow: "hidden",
         margin: "auto",
         marginTop: "20px",
         marginBottom: "50px",
       }}
     >
-      <TableContainer sx={{ maxHeight: 500 }}>
+      <TableContainer sx={{ maxHeight: 450 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
