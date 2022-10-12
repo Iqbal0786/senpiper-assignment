@@ -18,7 +18,17 @@ export default function Feedback() {
     overallRating: [],
   });
   const navigate=useNavigate()
-  const [isValidate, setIsValidate] = useState(false);
+  const [isValidate, setIsValidate] = useState({
+     name:false,
+     name: false,
+    email: false,
+    country: false,
+    phone: false,
+    serviceRating: false,
+    beverageRating: false,
+    cleaningRating: false,
+    overallRating: false,
+  });
   // form input handler
   const formHandler = (e) => {
     const { value, name } = e.target;
@@ -93,21 +103,21 @@ export default function Feedback() {
     } = userinput;
 
     if (!name) {
-      setIsValidate(true);
+      setIsValidate({...isValidate, name:true});
     } else if (!email) {
-      setIsValidate(true);
+      setIsValidate({...isValidate, email:true});
     } else if (!phone) {
-      setIsValidate(true);
+      setIsValidate({...isValidate, phone:true});
     } else if (!country) {
-      setIsValidate(true);
+      setIsValidate({...isValidate, country:true});
     } else if (!serviceRating.length) {
-      setIsValidate(true);
+      setIsValidate({...isValidate, serviceRating:true});
     } else if (!beverageRating.length) {
-      setIsValidate(true);
+      setIsValidate({...isValidate, beverageRating:true});
     } else if (!cleaningRating.length) {
-      setIsValidate(true);
+      setIsValidate({...isValidate, cleaningRating:true});
     } else if (!overallRating.length) {
-      setIsValidate(true);
+      setIsValidate({...isValidate, overallRating:true});
     } else {
       // setting up local storage
       let feedbacklist = JSON.parse(localStorage.getItem("feedbackDb")) || [];
@@ -163,7 +173,7 @@ export default function Feedback() {
                   onChange={formHandler}
                   name="name"
                 />
-                {isValidate && (
+                {isValidate.name && (
                   <p className="warning-text">
                     {" "}
                     <i class="bi bi-exclamation-circle"></i>Please enter the
