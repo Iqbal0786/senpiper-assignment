@@ -52,7 +52,7 @@ export default function FeedbackDashboard() {
       timer: 5000,
     });
     setToDeleteRecords([]);
-    console.log(updatedlist);
+    // console.log(updatedlist);
   };
   const fetchRecord = () => {
     let feedbacklist = JSON.parse(localStorage.getItem("feedbackDb"));
@@ -93,7 +93,7 @@ export default function FeedbackDashboard() {
               onChange={getSearchInput}
               placeholder="i.e name , email ,phone"
             />
-            <i class="bi bi-search" onClick={searchHandler}></i>
+            <i className="bi bi-search" onClick={searchHandler}></i>
             <Button
               style={{
                 backgroundColor: "white",
@@ -107,7 +107,7 @@ export default function FeedbackDashboard() {
                 setSearchText("");
               }}
             >
-              <i class="bi bi-arrow-clockwise"></i>
+              <i className="bi bi-arrow-clockwise"></i>
             </Button>
             <Button
               style={{
