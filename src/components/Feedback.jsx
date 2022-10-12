@@ -106,23 +106,20 @@ export default function Feedback() {
       setIsValidate(true);
     } else if (!overallRating.length) {
       setIsValidate(true);
-    }
-    else {
-      // setting up local storage 
-       let feedbacklist=JSON.parse(localStorage.getItem("feedbackDb"))||[];
-        feedbacklist.push(userinput)
-      localStorage.setItem("feedbackDb" , JSON.stringify(feedbacklist))
+    } else {
+      // setting up local storage
+      let feedbacklist = JSON.parse(localStorage.getItem("feedbackDb")) || [];
+      feedbacklist.push(userinput);
+      localStorage.setItem("feedbackDb", JSON.stringify(feedbacklist));
       Swal.fire({
-        position: 'top-center',
-        icon: 'success',
-        title: 'Thank you for providing your feedback',
-        text:"We will work towards improving your experience",
-        confirmButtonText: 'Close'
-        
-      }).then((result)=>{
-           if(result.isConfirmed){
-            setUserInput({
-              id: uuidv4(),
+        position: "top-center",
+        icon: "success",
+        title: "Thank you for providing your feedback",
+        text: "We will work towards improving your experience",
+        confirmButtonText: "Close",
+      });
+      setUserInput({
+        id: uuidv4(),
         name: "",
         email: "",
         country: "",
@@ -131,10 +128,8 @@ export default function Feedback() {
         beverageRating: [],
         cleaningRating: [],
         overallRating: [],
-            })
-           }
-      })
-     }
+      });
+    }
   };
 
   console.log(userinput);
@@ -170,7 +165,13 @@ export default function Feedback() {
                   onChange={formHandler}
                   name="name"
                 />
-                {isValidate && <p className="warning-text" > <i class="bi bi-exclamation-circle"></i>Please enter the value of the above field</p>}
+                {isValidate && (
+                  <p className="warning-text">
+                    {" "}
+                    <i class="bi bi-exclamation-circle"></i>Please enter the
+                    value of the above field
+                  </p>
+                )}
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label style={{ fontWeight: "bold" }}>
@@ -183,7 +184,6 @@ export default function Feedback() {
                   onChange={formHandler}
                   name="email"
                 />
-          
               </Form.Group>
             </Stack>
 

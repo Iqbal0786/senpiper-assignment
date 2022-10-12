@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 export default function RecordTable({ data, getRecordIds }) {
   const [filterData, setFilterData] = React.useState(data);
   const [selectedRecord, setSelectedRecord] = React.useState([]);
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   // console.log("checked data id" ,selectedRecord)
 
   const checkBoxHandler = (e, recordId) => {
@@ -29,7 +29,6 @@ export default function RecordTable({ data, getRecordIds }) {
   React.useEffect(() => {
     getRecordIds(selectedRecord);
   }, [selectedRecord]);
-
 
   return (
     <Paper
