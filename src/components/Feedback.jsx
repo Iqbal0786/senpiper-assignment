@@ -17,10 +17,10 @@ export default function Feedback() {
     cleaningRating: [],
     overallRating: [],
   });
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [isValidate, setIsValidate] = useState({
-     name:false,
-     name: false,
+    name: false,
+    name: false,
     email: false,
     country: false,
     phone: false,
@@ -103,21 +103,21 @@ export default function Feedback() {
     } = userinput;
 
     if (!name) {
-      setIsValidate({...isValidate, name:true});
+      setIsValidate({ ...isValidate, name: true });
     } else if (!email) {
-      setIsValidate({...isValidate, email:true});
+      setIsValidate({ ...isValidate, email: true });
     } else if (!phone) {
-      setIsValidate({...isValidate, phone:true});
+      setIsValidate({ ...isValidate, phone: true });
     } else if (!country) {
-      setIsValidate({...isValidate, country:true});
+      setIsValidate({ ...isValidate, country: true });
     } else if (!serviceRating.length) {
-      setIsValidate({...isValidate, serviceRating:true});
+      setIsValidate({ ...isValidate, serviceRating: true });
     } else if (!beverageRating.length) {
-      setIsValidate({...isValidate, beverageRating:true});
+      setIsValidate({ ...isValidate, beverageRating: true });
     } else if (!cleaningRating.length) {
-      setIsValidate({...isValidate, cleaningRating:true});
+      setIsValidate({ ...isValidate, cleaningRating: true });
     } else if (!overallRating.length) {
-      setIsValidate({...isValidate, overallRating:true});
+      setIsValidate({ ...isValidate, overallRating: true });
     } else {
       // setting up local storage
       let feedbacklist = JSON.parse(localStorage.getItem("feedbackDb")) || [];
@@ -131,6 +131,7 @@ export default function Feedback() {
         confirmButtonText: "Close",
       }).then((result) => {
         if (result.isConfirmed) {
+           navigate(0)
         } else {
         }
       });
@@ -147,10 +148,22 @@ export default function Feedback() {
         fluid
       >
         <Card style={{ height: "40px", padding: "5px 0px 5px 15px" }}>
-         <Stack direction="horizontal" gap={5}>
-         <Card.Title>Aromatic bar</Card.Title>
-          <Card.Title style={{marginLeft:"auto" , marginRight:"40px" , color:"blue" , cursor:"pointer" }} onClick={()=>{navigate("/dashboard")}}>Dashboard</Card.Title>
-         </Stack>
+          <Stack direction="horizontal" gap={5}>
+            <Card.Title>Aromatic bar</Card.Title>
+            <Card.Title
+              style={{
+                marginLeft: "auto",
+                marginRight: "40px",
+                color: "blue",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                navigate("/dashboard");
+              }}
+            >
+              Dashboard
+            </Card.Title>
+          </Stack>
         </Card>
         <Card
           style={{
@@ -172,6 +185,7 @@ export default function Feedback() {
                   style={{ width: "500px" }}
                   onChange={formHandler}
                   name="name"
+                  value={userinput.name}
                 />
                 {isValidate.name && (
                   <p className="warning-text">
@@ -191,6 +205,7 @@ export default function Feedback() {
                   style={{ width: "500px" }}
                   onChange={formHandler}
                   name="email"
+                  value={userinput.email}
                 />
               </Form.Group>
             </Stack>
@@ -204,6 +219,7 @@ export default function Feedback() {
                   style={{ width: "100px", fontSize: "16px" }}
                   name="country"
                   onChange={formHandler}
+              
                 >
                   {phoneData.map((opt) => {
                     return <option>{opt.name}</option>;
@@ -215,6 +231,7 @@ export default function Feedback() {
                   style={{ width: "390px" }}
                   name="phone"
                   onChange={formHandler}
+                  value={userinput.phone}
                 />
               </Stack>
             </Form.Group>
